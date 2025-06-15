@@ -1,16 +1,3 @@
-# 100 Must-Know Node.js Interview Questions in 2025
-
-<div>
-<p align="center">
-<a href="https://devinterview.io/questions/web-and-mobile-development/">
-<img src="https://firebasestorage.googleapis.com/v0/b/dev-stack-app.appspot.com/o/github-blog-img%2Fweb-and-mobile-development-github-img.jpg?alt=media&token=1b5eeecc-c9fb-49f5-9e03-50cf2e309555" alt="web-and-mobile-development" width="100%">
-</a>
-</p>
-
-#### You can also find all 100 answers here 👉 [Devinterview.io - Node.js](https://devinterview.io/questions/web-and-mobile-development/node-interview-questions)
-
-<br>
-
 ## 1. What is Node.js and why is it used?
 
 **Node.js** is an open-source, cross-platform JavaScript runtime environment that executes code outside of a web browser. It is built on V8, the same JavaScript engine within Chrome, and optimized for high performance. This environment, coupled with an event-driven, non-blocking I/O framework, is tailored for server-side web development and more.
@@ -40,7 +27,7 @@
 - **Scalability**: Cluster modules, load balancers, and Microservice Architecture aid in linear, on-demand scaling for both simple and intricate applications.
 - **Real-Time Power**: With built-in WebSockets and event-based architecture, Node.js excels in constructing real-time applications such as multiplayer games, stock trading platforms, and chat applications.
 - **Open Source**: Being an open-source technology, Node.js continuously benefits from community contributions, updates, and enhanced packages.
-<br>
+  <br>
 
 ## 2. How does Node.js handle child threads?
 
@@ -51,6 +38,7 @@ While Node.js **operates off a single main thread**, it can harness the full pow
 ### Thread Pool and Worker Threads
 
 To manage these child threads, Node.js uses a combination of:
+
 - A **thread pool**, powered by the libuv library.
 - **Worker threads** for dedicated, offloaded computation.
 
@@ -71,7 +59,7 @@ Here is the JavaScript code:
 
 ```javascript
 // Import the built-in 'worker_threads' module
-const { Worker, isMainThread, parentPort } = require('worker_threads');
+const { Worker, isMainThread, parentPort } = require("worker_threads");
 
 // Check if it's the main module
 if (isMainThread) {
@@ -79,19 +67,20 @@ if (isMainThread) {
   const worker = new Worker(__filename);
 
   // Listen for messages from the worker
-  worker.on('message', message => console.log('Received:', message));
+  worker.on("message", (message) => console.log("Received:", message));
 
   // Send a message to the worker
-  worker.postMessage('Hello from the main thread!');
+  worker.postMessage("Hello from the main thread!");
 } else {
   // Listen for messages from the main thread
-  parentPort.on('message', message => {
-    console.log('Received in the worker:', message);
+  parentPort.on("message", (message) => {
+    console.log("Received in the worker:", message);
     // Send a message back to the main thread
-    parentPort.postMessage('Hello from the worker thread!');
+    parentPort.postMessage("Hello from the worker thread!");
   });
 }
 ```
+
 <br>
 
 ## 3. Describe the event-driven programming in Node.js.
@@ -101,7 +90,6 @@ if (isMainThread) {
 ### Core Components
 
 - **Event Emitter**: Acts as the event registry and dispatcher, letting objects register interest in particular events and emit these events when they occur.
-  
 - **Event Handler (Listener)**: Associates with a particular event through registration. These callback functions will be asynchronously carried out when a matching event is emitted.
 
 #### Code Example: Event Emitter and Handlers
@@ -109,14 +97,14 @@ if (isMainThread) {
 Here is the Node.js code:
 
 ```javascript
-const { EventEmitter } = require('events');
+const { EventEmitter } = require("events");
 const emitter = new EventEmitter();
 
-emitter.on('event-name', (eventArgs) => {
-    console.log(`Event-name was emitted with arguments: ${eventArgs}`);
+emitter.on("event-name", (eventArgs) => {
+  console.log(`Event-name was emitted with arguments: ${eventArgs}`);
 });
 
-emitter.emit('event-name', 'Some Payload');
+emitter.emit("event-name", "Some Payload");
 ```
 
 In this code, when `emit` is called, the `on` method's callback is executed asynchronously.
@@ -132,11 +120,10 @@ In this code, when `emit` is called, the `on` method's callback is executed asyn
 ### Practical Applications in Node.js
 
 - **HTTP Server**: Listens for and serves requests.
-  
 - **File System Operations**: Execute I/O tasks.
 
 - **Database Operations**: Such as data retrieval.
-<br>
+  <br>
 
 ## 4. What is the event loop in Node.js?
 
@@ -179,36 +166,38 @@ Here is the JavaScript code:
 
 ```js
 // Code Example
-console.log('Start');
+console.log("Start");
 
-setTimeout(() => {  
-  console.log('Set Timeout - 1');
-  
-  Promise.resolve().then(() => {
-    console.log('Promise - 1');
-  }).then(() => {
-    console.log('Promise - 2');
-  });
+setTimeout(() => {
+  console.log("Set Timeout - 1");
 
+  Promise.resolve()
+    .then(() => {
+      console.log("Promise - 1");
+    })
+    .then(() => {
+      console.log("Promise - 2");
+    });
 }, 0);
 
 setImmediate(() => {
-  console.log('Set Immediate');
+  console.log("Set Immediate");
 });
 
 process.nextTick(() => {
-  console.log('Next Tick');
+  console.log("Next Tick");
   // It's like an infinite loop point for microtask queue
-  process.nextTick(() => console.log('Next Tick - nested'));
+  process.nextTick(() => console.log("Next Tick - nested"));
 });
 
-fs.readFile(file, 'utf-8', (err, data) => {
+fs.readFile(file, "utf-8", (err, data) => {
   if (err) throw err;
-  console.log('File Read');
+  console.log("File Read");
 });
 
-console.log('End');
+console.log("End");
 ```
+
 <br>
 
 ## 5. What is the difference between Node.js and traditional web server technologies?
@@ -251,7 +240,7 @@ console.log('End');
 
 - **Traditional Servers**: Ideal for enterprise systems, legacy applications, or when extensive computational tasks are required.
 - **Node.js**: Well-suited for data-intensive, real-time applications like collaborative tools, gaming, or social media platforms. Its lightweight, scalable nature also complements cloud deployments.
-<br>
+  <br>
 
 ## 6. Explain what "non-blocking" means in Node.js.
 
@@ -284,16 +273,16 @@ By not using threads, Node.js eliminates many of the complexities associated wit
 Here is the JavaScript code:
 
 ```javascript
-const fs = require('fs');
+const fs = require("fs");
 
 // Perform non-blocking file read operation
-fs.readFile('path/to/file', (err, data) => {
-    if (err) throw err;
-    console.log(data);
+fs.readFile("path/to/file", (err, data) => {
+  if (err) throw err;
+  console.log(data);
 });
 
 // Other non-blocking operations continue without waiting for file read
-console.log('This message is displayed immediately.');
+console.log("This message is displayed immediately.");
 ```
 
 In this example, the file read operation is non-blocking. Node.js does not halt the thread of execution to wait for the file read to complete. Instead, the supplied callback function is invoked when the read operation finishes.
@@ -310,6 +299,7 @@ Regular updates ensure that your **Node.js** setup is secure, efficient, and equ
   ```shell
   npm cache clean -f
   ```
+
   ```shell
   npm install -g n
   ```
@@ -343,6 +333,7 @@ Verify that the update was successful by checking the version number:
 ```shell
 node -v
 ```
+
 <br>
 
 ## 8. What is "npm" and what is it used for?
@@ -441,7 +432,7 @@ The `package.json` can include custom scripts for tasks like testing, building, 
 - **Install lodash**: `npm install lodash`
 - **Install express and save as a devDependency**: `npm install express --save-dev`
 - **Update all packages**: `npm update`
-<br>
+  <br>
 
 ## 10. What is a package.json file?
 
@@ -512,11 +503,10 @@ During the Travis CI build, you can run `npm test` to execute Mocha tests as per
 ### Best Practices
 
 - **Regular Updates**: Keep your dependencies up to date, especially any security patches or bug fixes.
-  
 - **Conservative Versioning**: Use `^` for minor upgrades and `~` for patch upgrades to maximize stability and compatibility.
 
 - **Try out 'npm' & 'yarn'**: Both are reliable package managers, so pick one that best suits your workflow.
-<br>
+  <br>
 
 ## 11. Describe some of the core modules of Node.js.
 
@@ -564,32 +554,35 @@ During the Travis CI build, you can run `npm test` to execute Mocha tests as per
 Here is the node.js code:
 
 ```js
-const os = require('os');
-const fs = require('fs');
-const http = require('http');
-const path = require('path');
-const url = require('url');
-const zlib = require('zlib');
+const os = require("os");
+const fs = require("fs");
+const http = require("http");
+const path = require("path");
+const url = require("url");
+const zlib = require("zlib");
 
 // Module: os
-console.log('Free memory:', os.freemem());
-console.log('Total memory:', os.totalmem());
+console.log("Free memory:", os.freemem());
+console.log("Total memory:", os.totalmem());
 
 // Module: fs
-fs.readFile('input.txt', 'utf8', (err, data) => {
+fs.readFile("input.txt", "utf8", (err, data) => {
   if (err) throw err;
   console.log(data);
 });
 
 // Module: http
-http.createServer((req, res) => {
-  const reqPath = url.parse(req.url).pathname;
-  const file = path.join(__dirname, reqPath);
+http
+  .createServer((req, res) => {
+    const reqPath = url.parse(req.url).pathname;
+    const file = path.join(__dirname, reqPath);
 
-  const readStream = fs.createReadStream(file);
-  readStream.pipe(zlib.createGzip()).pipe(res);
-}).listen(8080);
+    const readStream = fs.createReadStream(file);
+    readStream.pipe(zlib.createGzip()).pipe(res);
+  })
+  .listen(8080);
 ```
+
 <br>
 
 ## 12. How do you create a simple server in Node.js using the HTTP module?
@@ -611,19 +604,18 @@ First, a few steps are necessary.
 
 4. **Listen on a Port**: Use the `.listen` method to specify the port the server should "listen" on, waiting for incoming requests.
 
-
 ### Code Example: Server Setup
 
 Here is the Node.js code:
 
 ```js
 // Import the http module
-const http = require('http');
+const http = require("http");
 
 // Define the callback function
 const requestListener = (req, res) => {
   res.writeHead(200);
-  res.end('Hello, World!');
+  res.end("Hello, World!");
 };
 
 // Server initialization
@@ -647,12 +639,12 @@ Here is the Node.js code:
 
 ```js
 const requestListener = (req, res) => {
-  if(req.url === '/profile') {
+  if (req.url === "/profile") {
     res.writeHead(200);
-    res.end('Welcome to your profile!');
+    res.end("Welcome to your profile!");
   } else {
     res.writeHead(200);
-    res.end('Hello, World!');
+    res.end("Hello, World!");
   }
 };
 ```
@@ -694,19 +686,19 @@ The `fs` module covers a wide array of file-handling tasks, including:
 Here is the Node.js code:
 
 ```javascript
-const fs = require('fs');
+const fs = require("fs");
 
 // Asynchronous read
-fs.readFile('input.txt', (err, data) => {
+fs.readFile("input.txt", (err, data) => {
   if (err) {
     return console.error(err);
   }
-  console.log('Asynchronous read: ' + data.toString());
+  console.log("Asynchronous read: " + data.toString());
 });
 
 // Synchronous read
-const data = fs.readFileSync('input.txt');
-console.log('Synchronous read: ' + data.toString());
+const data = fs.readFileSync("input.txt");
+console.log("Synchronous read: " + data.toString());
 ```
 
 In the above code, both asynchronous and synchronous methods are demonstrated for file reading.
@@ -743,18 +735,19 @@ In **Node.js**, the `Buffer` class is a core module that provides a way to **rea
 Here is the JavaScript code:
 
 ```javascript
-let bufTemp = Buffer.from('Hey!');
+let bufTemp = Buffer.from("Hey!");
 console.log(bufTemp.toString()); // Output: Hey!
 
-let bufAlloc = Buffer.alloc(5, 'a');
+let bufAlloc = Buffer.alloc(5, "a");
 console.log(bufAlloc.toString()); // Output: aaaaa
 
-bufAlloc.write('Hello');
+bufAlloc.write("Hello");
 console.log(bufAlloc.toString()); // Output: Hello
 
-let bufSlice = bufAlloc.slice(0, 3);  // Slice the buffer
-console.log(bufSlice.toString());  // Output: Hel
+let bufSlice = bufAlloc.slice(0, 3); // Slice the buffer
+console.log(bufSlice.toString()); // Output: Hel
 ```
+
 <br>
 
 ## 15. What are streams in Node.js and what types are available?
@@ -784,9 +777,7 @@ console.log(bufSlice.toString());  // Output: Hel
 3. **Server Operations**: Streams facilitate data transfer for operations such as network requests, database communications, and more.
 
 4. **Pipelines**: Streams can be easily combined using `pipe()` to create powerful, efficient operations called pipelines. For instance, to compress a file and then write it to disk, you can pipe a readable stream to a transform stream and then to a writable stream. This arrangement neatly dictates the flow of data.
-<br>
-
-
+   <br>
 
 #### Explore all 100 answers here 👉 [Devinterview.io - Node.js](https://devinterview.io/questions/web-and-mobile-development/node-interview-questions)
 
@@ -796,4 +787,3 @@ console.log(bufSlice.toString());  // Output: Hel
 <img src="https://firebasestorage.googleapis.com/v0/b/dev-stack-app.appspot.com/o/github-blog-img%2Fweb-and-mobile-development-github-img.jpg?alt=media&token=1b5eeecc-c9fb-49f5-9e03-50cf2e309555" alt="web-and-mobile-development" width="100%">
 </a>
 </p>
-
