@@ -1,0 +1,31 @@
+{
+  "name": "top-javascript-interview-questions",
+  "version": "1.0.0",
+  "description": "List of top JavaScript interview questions",
+  "main": "index.js",
+  "scripts": {
+    "gen": "tsx scripts/gen.ts",
+    "rank": "tsx scripts/rank.ts",
+    "i18n": "langnostic translate"
+  },
+  "keywords": [
+    "javascript",
+    "interview",
+    "questions"
+  ],
+  "author": "yangshun",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^20.14.2",
+    "github-slugger": "^2.0.0",
+    "globby": "^14.0.1",
+    "gray-matter": "^4.0.3",
+    "langnostic": "^0.0.8",
+    "lodash-es": "^4.17.21",
+    "tsx": "^4.15.1"
+  },
+  "packageManager": "pnpm@8.15.8",
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}
